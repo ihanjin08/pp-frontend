@@ -20,7 +20,7 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
   useEffect(() => {
     const testApiConnection = async () => {
       try {
-        const result = await axios.get('http://127.0.0.1:8000/');
+        const result = await axios.get('/api/');
         setApiStatus(`API Status: ${result.data.message || 'Connected'}`);
       } catch (err) {
         setApiStatus('API Status: Failed to connect to the API.');
@@ -50,7 +50,7 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
             setError(null);
 
             const result = await axios.post<GradingResponse>(
-              'http://127.0.0.1:8000/grade',
+              '/api/grade',
               requestData
             );
 
