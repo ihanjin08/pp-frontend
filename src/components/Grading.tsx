@@ -34,7 +34,7 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
             setError(null);
 
             const result = await axios.post<GradingResponse>(
-              'https://ibgrader.com/api/grade',
+              '/api/grade',
               requestData
             );
 
