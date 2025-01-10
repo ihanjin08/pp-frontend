@@ -24,7 +24,7 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
           const requestData = {
             subject: "Language and Literature",
             criterion: "D",
-            content,
+            content: content,
             chunk_size: 250,
             chunk_overlap: 50,
           };
@@ -34,7 +34,7 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
             setError(null);
 
             const result = await axios.post<GradingResponse>(
-              '/api/grade',
+              '/api/grade/',
               requestData
             );
 
