@@ -22,8 +22,8 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
         const content = event.target?.result as string;
         if (content) {
           const requestData = {
-            subject: "Language and Literature", // Example subject
-            criterion: "C", // Example criterion
+            subject: "Language and Literature",
+            criterion: "D",
             content,
             chunk_size: 250,
             chunk_overlap: 50,

@@ -14,7 +14,7 @@ const App: React.FC = () => {
   return (
     <div>
       <FileInput multiple={false} onFilesSelected={handleFiles} />
-      <Grading file={selectedFile} /> {/* Passing selectedFile to Grading */}
+      <Grading file={selectedFile} /> {}
     </div>
   );
 };
