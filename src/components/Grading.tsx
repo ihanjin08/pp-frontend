@@ -34,7 +34,7 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
             setError(null);
 
             const result = await axios.post<GradingResponse>(
-              'http://127.0.0.1:8000/grade',
+              'http://192.168.219.115:8000/grade',
               requestData
             );
 
