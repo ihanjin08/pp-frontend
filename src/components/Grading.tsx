@@ -14,7 +14,23 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
   const [response, setResponse] = useState<GradingResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [apiStatus, setApiStatus] = useState<string | null>(null);
 
+  // Test API connection on component mount
+  useEffect(() => {
+    const testApiConnection = async () => {
+      try {
+        const result = await axios.get('http://127.0.0.1:8000/');
+        setApiStatus(`API Status: ${result.data.message || 'Connected'}`);
+      } catch (err) {
+        setApiStatus('API Status: Failed to connect to the API.');
+      }
+    };
+
+    testApiConnection();
+  }, []);
+
+  // Handle file grading
   useEffect(() => {
     if (file) {
       const reader = new FileReader();
@@ -22,9 +38,9 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
         const content = event.target?.result as string;
         if (content) {
           const requestData = {
-            subject: "Language and Literature",
-            criterion: "D",
-            content: content,
+            subject: 'Language and Literature',
+            criterion: 'D',
+            content,
             chunk_size: 250,
             chunk_overlap: 50,
           };
@@ -34,7 +50,7 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
             setError(null);
 
             const result = await axios.post<GradingResponse>(
-              '/api/grade/',
+              'http://127.0.0.1:8000/grade',
               requestData
             );
 
@@ -50,19 +66,21 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
     }
   }, [file]);
 
-  if (!file) {
-    return <p>Please select a file to grade.</p>;
-  }
-
   return (
     <div>
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {response && (
-        <div>
-          <h2>Feedback:</h2>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
-        </div>
+      <p>{apiStatus || 'Checking API connection...'}</p>
+      {!file && <p>Please select a file to grade.</p>}
+      {file && (
+        <>
+          {loading && <p>Loading...</p>}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {response && (
+            <div>
+              <h2>Feedback:</h2>
+              <pre>{JSON.stringify(response, null, 2)}</pre>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
