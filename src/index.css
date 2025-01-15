@@ -25,9 +25,11 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  justify-content: center;
+  align-items: flex-start; /* Changed from center to flex-start */
   min-height: 100vh;
+  padding-top: 40px; /* Add some top padding */
+  background-color: #242424;
 }
 
 h1 {

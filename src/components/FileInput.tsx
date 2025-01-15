@@ -11,7 +11,14 @@ const FileInput: React.FC<FileInputProps> = ({ multiple = false, onFilesSelected
     onFilesSelected(files);
   };
 
-  return <input type="file" multiple={multiple} onChange={handleChange} />;
+  return (
+    <input
+      type="file"
+      multiple={multiple}
+      onChange={handleChange}
+      accept=".md" // Restrict to .md files only
+    />
+  );
 };
 
 export default FileInput;
