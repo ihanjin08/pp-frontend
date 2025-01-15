@@ -11,11 +11,13 @@ interface GradingProps {
   };
 }
 
+interface FeedbackItem {
+  strand: number;
+  feedback: string;
+}
+
 interface GradingResponse {
-  feedback: {
-    strand: number;
-    feedback: string;
-  }[];
+  feedback: FeedbackItem[];
   final: number;
 }
 
@@ -62,7 +64,6 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
       setResponse(null);
 
       const result = await axios.post<GradingResponse>('/api/grade', requestData);
-
       setResponse(result.data);
     } catch (err) {
       setError('Failed to grade content. Please try again.');
