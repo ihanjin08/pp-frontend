@@ -12,7 +12,7 @@ interface GradingProps {
 }
 
 interface GradingResponse {
-  feedback: string[];
+  feedback: string[][];
   final: string;
 }
 
@@ -105,7 +105,13 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
       {response && (
         <div className={styles.feedback}>
           <h2>Feedback:</h2>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
+          {/* Displaying the feedback */}
+          <pre>
+            {response.feedback[0][0] + '\n'}
+            {response.feedback[0][1] + '\n'}
+            {response.feedback[0][2] + '\n'}
+            {response.feedback[1]}
+          </pre>
         </div>
       )}
     </div>

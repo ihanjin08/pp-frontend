@@ -4,27 +4,38 @@
   font-weight: 400;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: linear-gradient(to bottom right, #1e1e30, #2a2a5c);
+  background: linear-gradient(to bottom right, #1e1e30, #2a2a5c);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  background: linear-gradient(to bottom right, #1e1e30, #2a2a5c); /* Keeps the gradient visible */
+}
+
 .appContainer {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .content {
-    width: 100%;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+  min-height: 100vh; /* Ensures the appContainer is at least as tall as the viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute content (useful for a footer, if needed) */
+  padding-top: 70px; /* Add padding to account for the NavBar height */
+}
+
+.content {
+  flex-grow: 1; /* Makes content expand to fill available space */
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
