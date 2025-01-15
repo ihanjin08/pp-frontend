@@ -5,6 +5,7 @@ import Grading from './components/Grading';
 import Settings from './components/Settings';
 import NavBar from './components/NavBar';  // Import NavBar
 import styles from './App.module.css';
+import Tutorial from './components/Tutorial';
 
 const App: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -61,8 +62,8 @@ const App: React.FC = () => {
               } 
             />
             <Route 
-              path="/how-to-use" 
-              element={<h1>How to Use Page</h1>} 
+              path="/how-to-use"
+              element={<Tutorial/>} 
             />
           </Routes>
         </div>

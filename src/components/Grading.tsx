@@ -101,7 +101,7 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
                 : 'None'}
             </p>
             <button onClick={handleSubmit} disabled={loading}>
-              {loading ? 'Submitting...' : 'Submit Selected Text'}
+              {loading ? 'Grading... (This may take up to a minute)' : 'Grade Selected Text'}
             </button>
           </div>
         </>
