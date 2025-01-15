@@ -56,3 +56,25 @@
     word-wrap: break-word;
   }
   
+  .feedbackItem {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .feedbackItem ul {
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+  }
+  
+  .feedbackItem li {
+    margin-bottom: 0.25rem;
+  }
+  
+  .finalGrade {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c5282;
+    margin-top: 1rem;
+  }

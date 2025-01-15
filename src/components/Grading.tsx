@@ -11,14 +11,16 @@ interface GradingProps {
   };
 }
 
-interface FeedbackItem {
-  strand: number;
-  feedback: string;
+interface StrandFeedback {
+  strand: string;
+  working_level: string | null;
+  evidence: string[];
+  reasoning: string;
 }
 
 interface GradingResponse {
-  feedback: FeedbackItem[];
-  final: number;
+  strands: StrandFeedback[];
+  final: string;
 }
 
 const Grading: React.FC<GradingProps> = ({ file, settings }) => {
@@ -67,6 +69,7 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
       setResponse(result.data);
     } catch (err) {
       setError('Failed to grade content. Please try again.');
+      console.error('Grading error:', err);
     } finally {
       setLoading(false);
     }
@@ -111,12 +114,19 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
       {response && (
         <div className={styles.feedbackSection}>
           <h2>Feedback</h2>
-          {response.feedback.map((item, index) => (
+          {response.strands.map((item, index) => (
             <div key={index} className={styles.feedbackItem}>
-              <p>
-                <strong>Strand {item.strand}:</strong>
-              </p>
-              <ReactMarkdown>{item.feedback}</ReactMarkdown>
+              <h3>{item.strand}</h3>
+              <p><strong>Working Level:</strong> {item.working_level || 'N/A'}</p>
+              <div>
+                <strong>Evidence:</strong>
+                <ul>
+                  {item.evidence.map((evidence, idx) => (
+                    <li key={idx}>{evidence}</li>
+                  ))}
+                </ul>
+              </div>
+              <p><strong>Reasoning:</strong> {item.reasoning}</p>
             </div>
           ))}
           <h3>Final Grade</h3>
