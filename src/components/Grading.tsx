@@ -37,47 +37,46 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
   }, [file]);
 
   const handleToggleSelect = (text: string) => {
-    setSelectedParts((prev) => {
-      if (prev.includes(text)) {
-        return prev.filter((part) => part !== text);
-      } else {
-        return [...prev, text];
-      }
-    });
+    setSelectedParts((prev) =>
+      prev.includes(text) ? prev.filter((part) => part !== text) : [...prev, text]
+    );
   };
 
   const handleSubmit = async () => {
-    if (selectedParts.length > 0) {
-      const requestData = {
-        subject: settings.subject,
-        criterion: settings.criterion,
-        content: selectedParts.join('\n\n'),
-        chunk_size: 250,
-        chunk_overlap: 50,
-      };
-
-      try {
-        setLoading(true);
-        setError(null);
-
-        const result = await axios.post<GradingResponse>('/api/grade', requestData);
-
-        setResponse(result.data);
-      } catch (err) {
-        setError('Failed to grade content. Please try again.');
-      } finally {
-        setLoading(false);
-      }
-    } else {
+    if (selectedParts.length === 0) {
       setError('Please select at least one part of the content to submit.');
+      return;
+    }
+
+    const requestData = {
+      subject: settings.subject,
+      criterion: settings.criterion,
+      content: selectedParts.join('\n\n'),
+      chunk_size: 250,
+      chunk_overlap: 50,
+    };
+
+    try {
+      setLoading(true);
+      setError(null);
+      setResponse(null);
+
+      const result = await axios.post<GradingResponse>('/api/grade', requestData);
+
+      setResponse(result.data);
+    } catch (err) {
+      setError('Failed to grade content. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className={styles.container}>
-      {content && (
-        <div>
+      {content ? (
+        <>
           <div className={styles.markdownPreview}>
+            <h2>Content Preview</h2>
             {content.split('\n\n').map((paragraph, index) => (
               <div
                 key={index}
@@ -90,35 +89,37 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
               </div>
             ))}
           </div>
-          <p>
-            <strong>Selected Parts:</strong>{' '}
-            {selectedParts.length > 0
-              ? `${selectedParts.length} part(s) selected`
-              : 'None'}
-          </p>
-          <button onClick={handleSubmit} disabled={loading}>
-            {loading ? 'Submitting...' : 'Submit Selected Text'}
-          </button>
-        </div>
+          <div className={styles.selectionInfo}>
+            <p>
+              <strong>Selected Parts:</strong>{' '}
+              {selectedParts.length > 0
+                ? `${selectedParts.length} part(s) selected`
+                : 'None'}
+            </p>
+            <button onClick={handleSubmit} disabled={loading}>
+              {loading ? 'Submitting...' : 'Submit Selected Text'}
+            </button>
+          </div>
+        </>
+      ) : (
+        <p className={styles.info}>Upload a file to view its content.</p>
       )}
+
       {error && <p className={styles.error}>{error}</p>}
+
       {response && (
-        <div className={styles.feedback}>
-          <h2>Feedback:</h2>
-          {response.feedback.length > 0 ? (
-            <div>
-              {response.feedback.map((item, index) => (
-                <div key={index} className={styles.feedbackItem}>
-                  <p><strong>Strand {item.strand}:</strong></p>
-                  <ReactMarkdown>{item.feedback}</ReactMarkdown>
-                </div>
-              ))}
+        <div className={styles.feedbackSection}>
+          <h2>Feedback</h2>
+          {response.feedback.map((item, index) => (
+            <div key={index} className={styles.feedbackItem}>
+              <p>
+                <strong>Strand {item.strand}:</strong>
+              </p>
+              <ReactMarkdown>{item.feedback}</ReactMarkdown>
             </div>
-          ) : (
-            <p>No feedback available.</p>
-          )}
-          <h3>Final Grade:</h3>
-          <p>{response.final}</p>
+          ))}
+          <h3>Final Grade</h3>
+          <p className={styles.finalGrade}>{response.final}</p>
         </div>
       )}
     </div>
