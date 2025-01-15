@@ -8,7 +8,7 @@ const App: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [settings, setSettings] = useState({
     subject: 'Language and Literature',
-    criterion: 'D',
+    criterion: 'A',
   });
 
   const handleFiles = (files: File[]) => {
@@ -33,7 +33,7 @@ const App: React.FC = () => {
           onSettingsChange={handleSettingsChange} 
         />
         <FileInput multiple={false} onFilesSelected={handleFiles} />
-        <Grading file={selectedFile} />
+        <Grading file={selectedFile} settings={settings} />
       </div>
     </div>
   );

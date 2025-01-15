@@ -5,6 +5,10 @@ import styles from './Grading.module.css';
 
 interface GradingProps {
   file: File | null;
+  settings: {
+    subject: string;
+    criterion: string;
+  };
 }
 
 interface GradingResponse {
@@ -12,14 +16,13 @@ interface GradingResponse {
   final: string;
 }
 
-const Grading: React.FC<GradingProps> = ({ file }) => {
+const Grading: React.FC<GradingProps> = ({ file, settings }) => {
   const [content, setContent] = useState<string | null>(null);
   const [selectedParts, setSelectedParts] = useState<string[]>([]);
   const [response, setResponse] = useState<GradingResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Load file content for preview
   useEffect(() => {
     if (file) {
       const reader = new FileReader();
@@ -30,14 +33,11 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
     }
   }, [file]);
 
-  // Handle selecting/deselecting parts of the text
   const handleToggleSelect = (text: string) => {
     setSelectedParts((prev) => {
       if (prev.includes(text)) {
-        // Deselect the text
         return prev.filter((part) => part !== text);
       } else {
-        // Select the text
         return [...prev, text];
       }
     });
@@ -46,8 +46,8 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
   const handleSubmit = async () => {
     if (selectedParts.length > 0) {
       const requestData = {
-        subject: 'Language and Literature',
-        criterion: 'D',
+        subject: settings.subject,
+        criterion: settings.criterion,
         content: selectedParts.join('\n\n'),
         chunk_size: 250,
         chunk_overlap: 50,
@@ -73,19 +73,6 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
     }
   };
 
-  useEffect(() => {
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setContent(event.target?.result as string);
-      };
-      reader.readAsText(file);
-    } else {
-      // Display placeholder or initial content
-      setContent('No file selected. Preview placeholder text or instructions.');
-    }
-  }, [file]);
-  
   return (
     <div className={styles.container}>
       {content && (
@@ -122,7 +109,7 @@ const Grading: React.FC<GradingProps> = ({ file }) => {
         </div>
       )}
     </div>
-  );  
+  );
 };
 
 export default Grading;
