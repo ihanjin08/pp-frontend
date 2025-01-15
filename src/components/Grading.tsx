@@ -12,8 +12,11 @@ interface GradingProps {
 }
 
 interface GradingResponse {
-  feedback: string[];
-  final: string;
+  feedback: {
+    strand: number;
+    feedback: string;
+  }[];
+  final: number;
 }
 
 const Grading: React.FC<GradingProps> = ({ file, settings }) => {
@@ -57,10 +60,7 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
         setLoading(true);
         setError(null);
 
-        const result = await axios.post<GradingResponse>(
-          '/api/grade',
-          requestData
-        );
+        const result = await axios.post<GradingResponse>('/api/grade', requestData);
 
         setResponse(result.data);
       } catch (err) {
@@ -107,10 +107,10 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
           <h2>Feedback:</h2>
           {response.feedback.length > 0 ? (
             <div>
-              {response.feedback.map((feedbackItem, index) => (
+              {response.feedback.map((item, index) => (
                 <div key={index} className={styles.feedbackItem}>
-                  <p><strong>Strand {index + 1}:</strong></p>
-                  <ReactMarkdown>{feedbackItem}</ReactMarkdown>
+                  <p><strong>Strand {item.strand}:</strong></p>
+                  <ReactMarkdown>{item.feedback}</ReactMarkdown>
                 </div>
               ))}
             </div>
