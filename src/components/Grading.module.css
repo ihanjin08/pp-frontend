@@ -11,9 +11,9 @@
     overflow: hidden;
     max-width: 100%;
     border: 1px solid #6a6ab3;
-  }
-  
-  .paragraph {
+}
+
+.paragraph {
     cursor: pointer;
     padding: 8px;
     border-radius: 4px;
@@ -75,6 +75,6 @@
   .finalGrade {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #2c5282;
+    color: #d1d1e6;
     margin-top: 1rem;
   }
