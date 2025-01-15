@@ -22,8 +22,8 @@
   gap: 5px;
   font-size: 0.9rem;
   color: #b3baff;
+  margin-bottom: 4px; /* Add this line to create space below labels */
 }
-
 .settingsOptions select {
   padding: 8px;
   border: 1px solid #6a6ab3;
@@ -38,10 +38,10 @@
   border-color: #8a98ff;
   outline: none;
 }
-
 .buttonGroup {
   display: flex;
   gap: 10px;
+  align-items: center; /* Add this to align buttons vertically */
 }
 
 button {
@@ -49,6 +49,10 @@ button {
   border: 1px solid #8a98ff;
   background: linear-gradient(to right, #2a2a5c, #4e4e8e);
   cursor: pointer;
+  height: 35px; /* Match the height of your select elements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button:hover {
