@@ -1,36 +1,40 @@
 .settingsBar {
-    width: 100%;
-    background-color: #333333;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    margin-bottom: 20px;
-  }
-  
-  .settingsOptions {
-    display: flex;
-    gap: 20px;
-    justify-content: flex-start;
-  }
-  
-  .settingsOptions label {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 0.9rem;
-  }
-  
-  .settingsOptions select {
-    padding: 8px;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background-color: #1a1a1a;
-    color: white;
-    min-width: 200px;
-  }
-  
-  .settingsOptions select:focus {
-    border-color: #646cff;
-    outline: none;
-  }
+  width: 100%;
+  background: linear-gradient(to right, #2a2a5c, #1e1e30);
+  border: 1px solid #6a6ab3;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  color: #d1d1e6;
+}
+
+.settingsOptions {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.settingsOptions label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #b3baff;
+}
+
+.settingsOptions select {
+  padding: 8px;
+  border: 1px solid #6a6ab3;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #d1d1e6;
+  min-width: 200px;
+  transition: border-color 0.3s;
+}
+
+.settingsOptions select:focus {
+  border-color: #8a98ff;
+  outline: none;
+}

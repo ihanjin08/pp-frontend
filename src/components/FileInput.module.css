@@ -1,0 +1,69 @@
+/* Container for the file input */
+.fileInputContainer {
+    position: relative;
+    display: inline-flex;
+    align-items: center; /* Align button and text */
+  }
+  
+  /* Hide the actual input element */
+  .fileInput {
+    display: none;
+  }
+  
+  /* Style the label to look like a button */
+  .fileLabel {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.4em 0.8em;
+    font-size: 0.9rem;
+    color: #ffffff;
+    font-weight: 500;
+    font-family: inherit;
+    background: linear-gradient(to right, #2a2a5c, #4e4e8e); /* Gradient color */
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.25s;
+    border-color: #8a98ff;
+    text-align: center;
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
+  
+  /* Display the filename text next to the button */
+  .fileName {
+    margin-left: 1em;
+    font-size: 1em;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.87);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Keep the file name on one line */
+  }
+  
+  /* Hover state */
+  .fileLabel:hover {
+    transform: scale(1.05); /* Same as button hover */
+    background: #8a98ff;
+  }
+  
+  /* Focus state */
+  .fileLabel:focus,
+  .fileLabel:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+  
+  /* Active state */
+  .fileLabel:active {
+    background: linear-gradient(to right, #4e4e8e, #6a6ab3); /* Match button active state */
+  }
+  
+  /* Light mode styling */
+  @media (prefers-color-scheme: light) {
+    :root {
+      color: #213547;
+      background-color: #ffffff;
+    }
+    
+    .fileLabel {
+      background: linear-gradient(to right, #4e4e8e, #6a6ab3); /* Light mode gradient */
+    }
+  }
+  

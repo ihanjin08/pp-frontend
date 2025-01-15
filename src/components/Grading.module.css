@@ -3,49 +3,56 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: #333333;
+    background: linear-gradient(to right, #2a2a5c, #1e1e30);
     border-radius: 8px;
     padding: 20px;
     box-sizing: border-box;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    overflow: hidden; /* Ensures content doesn't overflow the container */
-    max-width: 100%; /* Prevents horizontal overflow */
-}
-
-.paragraph {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-width: 100%;
+    border: 1px solid #6a6ab3;
+  }
+  
+  .paragraph {
     cursor: pointer;
     padding: 8px;
     border-radius: 4px;
     margin-bottom: 8px;
-    transition: background-color 0.2s;
-    overflow-wrap: break-word; /* Handles long unbroken text */
-    word-wrap: break-word; /* Ensures proper text wrapping */
-}
-
-.paragraph:hover {
-    background-color: #2a2a2a;
-}
-
-.selectedParagraph {
-    background-color: #2c3e50;
-}
-
-.error {
-    color: #ff6b6b;
+    background: rgba(255, 255, 255, 0.048);
+    color: #d1d1e6;
+    transition: background-color 0.2s, transform 0.2s;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  
+  .paragraph:hover {
+    background-color: rgba(164, 164, 224, 0.3);
+    transform: scale(1.01);
+  }
+  
+  .selectedParagraph {
+    background-color: rgba(164, 164, 224, 0.3);
+  }
+  
+  .error {
+    color: #ff5c5c;
     margin: 10px 0;
-    overflow-wrap: break-word; /* Ensures error messages don't overflow */
-}
-
-.feedback {
+    overflow-wrap: break-word;
+  }
+  
+  .feedback {
     margin-top: 20px;
     padding: 20px;
-    background-color: #1a1a1a;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 4px;
-    overflow: auto; /* Allows scrollbars if content overflows */
-    max-height: 300px; /* Optional: Limits the height of the feedback box */
-}
-
-.feedback pre {
+    overflow: auto;
+    max-height: 300px;
+    color: #d1d1e6;
+    
+  }
+  
+  .feedback pre {
     white-space: pre-wrap;
-    word-wrap: break-word; /* Handles long unbroken lines in preformatted text */
-}
+    word-wrap: break-word;
+  }
+  
