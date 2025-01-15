@@ -105,7 +105,20 @@ const Grading: React.FC<GradingProps> = ({ file, settings }) => {
       {response && (
         <div className={styles.feedback}>
           <h2>Feedback:</h2>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
+          {response.feedback.length > 0 ? (
+            <div>
+              {response.feedback.map((feedbackItem, index) => (
+                <div key={index} className={styles.feedbackItem}>
+                  <p><strong>Strand {index + 1}:</strong></p>
+                  <ReactMarkdown>{feedbackItem}</ReactMarkdown>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No feedback available.</p>
+          )}
+          <h3>Final Grade:</h3>
+          <p>{response.final}</p>
         </div>
       )}
     </div>
