@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Settings.module.css';
 
 interface SettingsProps {
@@ -7,17 +6,18 @@ interface SettingsProps {
     criterion: string;
   };
   onSettingsChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onCriterionSelect: (criterion: string) => void;
 }
 
-const Settings: React.FC<SettingsProps> = ({ settings, onSettingsChange }) => {
+const Settings: React.FC<SettingsProps> = ({ settings, onSettingsChange, onCriterionSelect }) => {
   return (
     <div className={styles.settingsBar}>
       <div className={styles.settingsOptions}>
         <label>
           Subject
-          <select 
-            name="subject" 
-            value={settings.subject} 
+          <select
+            name="subject"
+            value={settings.subject}
             onChange={onSettingsChange}
           >
             <option value="Language and Literature">Language and Literature</option>
@@ -27,19 +27,20 @@ const Settings: React.FC<SettingsProps> = ({ settings, onSettingsChange }) => {
             <option value="Design">Design</option>
           </select>
         </label>
-        <label>
-          Criterion
-          <select 
-            name="criterion" 
-            value={settings.criterion} 
-            onChange={onSettingsChange}
-          >
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-          </select>
-        </label>
+        <div>
+          <label>Criterion</label>
+          <div className={styles.buttonGroup}>
+            {['A', 'B', 'C', 'D'].map((criterion) => (
+              <button
+                key={criterion}
+                onClick={() => onCriterionSelect(criterion)}
+                className={settings.criterion === criterion ? styles.selectedButton : ''}
+              >
+                {criterion}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

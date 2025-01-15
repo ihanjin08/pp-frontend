@@ -1,5 +1,3 @@
-// App.tsx
-
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import FileInput from './components/FileInput';
@@ -15,12 +13,14 @@ const App: React.FC = () => {
     criterion: 'A',
   });
 
+  // Handle file selection
   const handleFiles = (files: File[]) => {
     if (files.length > 0) {
       setSelectedFile(files[0]);
     }
   };
 
+  // Handle settings change
   const handleSettingsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setSettings((prevSettings) => ({
@@ -29,20 +29,33 @@ const App: React.FC = () => {
     }));
   };
 
+  // Handle criterion button click
+  const handleCriterionSelect = (criterion: string) => {
+    setSettings((prevSettings) => ({
+      ...prevSettings,
+      criterion,
+    }));
+  };
+
   return (
     <Router>
       <div className={styles.appContainer}>
-        {}
         <NavBar />
         <div className={styles.content}>
-          {}
           <Routes>
             <Route 
               path="/" 
               element={
                 <>
-                  <Settings settings={settings} onSettingsChange={handleSettingsChange} />
+                  {/* Settings with onSettingsChange and onCriterionSelect */}
+                  <Settings 
+                    settings={settings} 
+                    onSettingsChange={handleSettingsChange} 
+                    onCriterionSelect={handleCriterionSelect} 
+                  />
+                  {/* FileInput for file selection */}
                   <FileInput multiple={false} onFilesSelected={handleFiles} />
+                  {/* Grading component that uses the selected file and settings */}
                   <Grading file={selectedFile} settings={settings} />
                 </>
               } 
@@ -52,7 +65,6 @@ const App: React.FC = () => {
               element={<h1>How to Use Page</h1>} 
             />
           </Routes>
-
         </div>
       </div>
     </Router>
